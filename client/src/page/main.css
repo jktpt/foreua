@@ -1,0 +1,151 @@
+.main-container{
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #355253;
+}
+
+.bg-main{
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.btn-edit{
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: darkblue;
+  border: 1px solid darkblue;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-wait{
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: rgb(27, 10, 36);
+  border: 1px solid rgb(53, 17, 51);
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-profile{
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: rgb(11, 133, 170);
+  border: 1px solid rgb(23, 104, 107);
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.btn-delete{
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+    margin-right: 8px;
+}
+.btn-adddata{
+    margin-top: 30px;
+    margin-left: 70px;
+    margin-bottom: 30px;
+}
+
+.main-datagrid{
+    width: 95%;
+    margin: 20px auto;
+}
+
+.btn-adddata a{
+    margin-right: 30px;
+    /* margin-bottom: 30px; */
+}
+
+/* CSS */
+.btn-add {
+  background-color: #36A9AE;
+  background-image: linear-gradient(#37ADB2, #329CA0);
+  border: 1px solid #2A8387;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: -apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 17px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 150px;
+}
+
+.btn-add:hover {
+  box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+.btn-add:active {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+.btn-add:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.btn-add:disabled:active {
+  pointer-events: none;
+}
+
+.btn-add:disabled:hover {
+  box-shadow: none;
+}
+/* CSS */
+.btn-doctor {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.btn-doctor:hover,
+.btn-doctor:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.btn-doctor:active {
+  opacity: .5;
+}
+.hide{
+  display: none;
+}
