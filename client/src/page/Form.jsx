@@ -25,8 +25,8 @@ export const Form = () => {
   const handleClick = async () => {
     const formData = new FormData();
 
-    formData.append("name", name);
-    formData.append("lname", lname);
+    formData.append("name", name.replace(/[0-9]/g, ''));
+    formData.append("lname", lname.replace(/[0-9]/g, ''));
     formData.append("dob", dob);
     formData.append("idcard", idcard);
     formData.append("tel", tel);
