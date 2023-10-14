@@ -73,10 +73,10 @@ export const Record = () => {
               </p>
               <p className="title1">
                 <b>เพศ</b>  {data.patient_gender === "M"
-                        ? "Male"
+                        ? "ชาย"
                         : data.patient_gender === "FM"
-                        ? "Female"
-                        : "Others"}
+                        ? "หญิง"
+                        : "ไม่ระบุ"}
               </p>
               <p className="title1">
                 <b>โรคประจำตัว</b> {data.patient_personal_disease}

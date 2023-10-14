@@ -45,10 +45,10 @@ export const Profile = () => {
                       <b>ชื่อ</b> : {v.patient_name + " " + v.patient_lname}{" "}
                       <b>เพศ</b> :{" "}
                       {v.patient_gender === "M"
-                        ? "Male"
+                        ? "ชาย"
                         : v.patient_gender === "FM"
-                        ? "Female"
-                        : "Others"}{" "}
+                        ? "หญิง"
+                        : "ไม่ระบุ"}{" "}
                       <b>เบอร์โทรศัท์</b> : {v.patient_tel}
                     </div>
                     <div className="line2">

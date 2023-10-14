@@ -201,16 +201,13 @@ export const Form = () => {
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    onClick={()=>{
-                      // console.log(gender);
-                    }}
                   >
                     <option value="" disabled>
                       เพศ
                     </option>
-                    <option value="M" selected={gender === "M"}>Male</option>
-                    <option value="FM" selected={gender === "FM"}>Female</option>
-                    <option value="OT" selected={gender === "OT"}>Others</option>
+                    <option value="M" selected={gender === "M"}>ชาย</option>
+                    <option value="FM" selected={gender === "FM"}>หญิง</option>
+                    <option value="OT" selected={gender === "OT"}>ไม่ระบุ</option>
                   </select>
                 </div>
 
