@@ -1,3 +1,1 @@
 /node_modules
-
-ALTER TABLE `patient_history` ADD `his_today` DATE NULL AFTER `his_medicine`;
