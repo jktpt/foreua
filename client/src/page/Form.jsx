@@ -18,7 +18,7 @@ export const Form = () => {
   const [pressure, setPressure] = useState("");
   const [cogdisease, setCogDisease] = useState("");
   const [allerdrug, setAllerDrug] = useState("");
-
+  // const curDate = new Date();
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
 
@@ -163,7 +163,8 @@ export const Form = () => {
                     onChange={(e) => setDob(e.target.value)}
                     placeholder="วันเดือนปีเกิด"
                     required
-                    // value={dob}
+                    value={dob}
+                    max={new Date().toISOString().split('T')[0]}
                   />
                 </div>
 
@@ -199,7 +200,7 @@ export const Form = () => {
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                     onClick={()=>{
-                      console.log(gender);
+                      // console.log(gender);
                     }}
                   >
                     <option value="" disabled>
