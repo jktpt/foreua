@@ -42,7 +42,7 @@ export const Form = () => {
     }else{
       
     }
-    if (data) {
+    if (data && tel.length !== 10 && idcard.length !== 13) {
       if (
         name.trim() !== "" ||
         lname.trim() !== "" ||
@@ -55,7 +55,7 @@ export const Form = () => {
         height.trim() !== "" ||
         pressure.trim() !== "" ||
         cogdisease.trim() !== "" ||
-        allerdrug.trim() !== ""
+        allerdrug.trim() !== "" && tel.length !== 10 && idcard.length !== 13
       ) {
         formData.append("patientid", patientId);
 
@@ -79,6 +79,7 @@ export const Form = () => {
         pressure.trim() !== "" ||
         cogdisease.trim() !== "" ||
         allerdrug.trim() !== ""
+        && tel.length !== 10 && idcard.length !== 13
       ) {
         await axios
           .post(`http://localhost:3001/api/patient/insertpatient`, formData)
