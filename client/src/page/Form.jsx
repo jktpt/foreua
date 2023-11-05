@@ -18,6 +18,7 @@ export const Form = () => {
   const [pressure, setPressure] = useState("");
   const [cogdisease, setCogDisease] = useState("");
   const [allerdrug, setAllerDrug] = useState("");
+  const [detail, setDetail] = useState("");
   // const curDate = new Date();
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
@@ -37,12 +38,13 @@ export const Form = () => {
     formData.append("pressure", pressure);
     formData.append("cogdisease", cogdisease);
     formData.append("allerdrug", allerdrug);
+    formData.append("detail", detail);
     if(tel.length !== 10 && idcard.length !== 13){
       alert("กรุณาใส่เบอร์โทรศัพท์หรือเลขบัตรประจำตัวประชาชนให้ถูกต้อง")
     }else{
       
     }
-    if (data && tel.length !== 10 && idcard.length !== 13) {
+    if (data) {
       if (
         name.trim() !== "" ||
         lname.trim() !== "" ||
@@ -55,7 +57,8 @@ export const Form = () => {
         height.trim() !== "" ||
         pressure.trim() !== "" ||
         cogdisease.trim() !== "" ||
-        allerdrug.trim() !== "" && tel.length !== 10 && idcard.length !== 13
+        allerdrug.trim() !== "" ||
+        detail.trim() !== ""
       ) {
         formData.append("patientid", patientId);
 
@@ -78,8 +81,9 @@ export const Form = () => {
         height.trim() !== "" ||
         pressure.trim() !== "" ||
         cogdisease.trim() !== "" ||
-        allerdrug.trim() !== ""
-        && tel.length !== 10 && idcard.length !== 13
+        allerdrug.trim() !== "" ||
+        detail.trim() !== ""
+
       ) {
         await axios
           .post(`http://localhost:3001/api/patient/insertpatient`, formData)
@@ -122,6 +126,7 @@ export const Form = () => {
       setPressure(data.patient_pressure || "");
       setCogDisease(data.patient_personal_disease || "");
       setAllerDrug(data.patient_medic || "");
+      setDetail(data.patient_detail || "")
     }
   }, [data]);
 
@@ -145,6 +150,7 @@ export const Form = () => {
                     placeholder="ชื่อ"
                     required
                     value={name}
+                    disabled={name.length > 0}
                   />
                 </div>
 
@@ -156,6 +162,7 @@ export const Form = () => {
                     placeholder="นามสกุล"
                     required
                     value={lname}
+                    disabled={lname.length > 0}
                   />
                 </div>
 
@@ -166,8 +173,9 @@ export const Form = () => {
                     onChange={(e) => setDob(e.target.value)}
                     placeholder="วันเดือนปีเกิด"
                     required
-                    value={dob}
+                    value={dob.split('T')[0]}
                     max={new Date().toISOString().split('T')[0]}
+                    disabled={dob.length > 0}
                   />
                 </div>
 
@@ -181,6 +189,7 @@ export const Form = () => {
                     maxLength={13}
                     value={idcard}
                     onChange={(e) => setIdCard(e.target.value)}
+                    disabled={idcard.length === 13}
                   />
                 </div>
 
@@ -194,6 +203,7 @@ export const Form = () => {
                     minLength={10}
                     maxLength={10}
                     value={tel}
+                    disabled={tel.length > 0}
                   />
                 </div>
 
@@ -202,6 +212,7 @@ export const Form = () => {
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
+                    disabled={gender.length > 0}
                   >
                     <option value="" disabled>
                       เพศ
@@ -220,6 +231,7 @@ export const Form = () => {
                     placeholder="ที่อยู่"
                     required
                     value={address}
+                    disabled={address.length > 0}
                   />
                 </div>
 
@@ -275,6 +287,17 @@ export const Form = () => {
                     placeholder="ยาที่แพ้"
                     required
                     value={allerdrug}
+                  />
+                </div>
+
+                <div className="input-field">
+                  <label>อาการเบื้องต้น</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setDetail(e.target.value)}
+                    placeholder="อาการเบื้องต้น"
+                    required
+                    value={detail}
                   />
                 </div>
               </div>

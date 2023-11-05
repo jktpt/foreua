@@ -75,17 +75,22 @@ export const Profile = () => {
             <br></br>
             <hr></hr>
             <br></br>
-            {history.map((h) => {
-              return (
-                <>
-                  <div className="line5"><b>ประวัติการรักษา</b> : {h.his_detail}</div>
-                  <div className="line6"><b>ยาที่ได้รับ</b> : {h.his_medicine}</div>
-                  <div className="line7"><b>นัดครั้งต่อไป</b> : {moment(h.his_next).format("DD-MM-YYYY")}</div>
-                  <br></br>
-                  <hr></hr>
-                  <br></br>
-                </>
-              );
+            {history?.map((h) => {
+              if(h.created_date){
+                return (
+                  <>
+                   <div className="line8"><b>วันที่เข้ารับการรักษา</b> : {moment(h.created_date).format("DD-MM-YYYY")}</div>
+                    <div className="line5"><b>ประวัติการรักษา</b> : {h.his_detail}</div>
+                    <div className="line6"><b>ยาที่ได้รับ</b> : {h.his_medicine}</div>
+                    <div className="line7"><b>นัดครั้งต่อไป</b> : {moment(h.his_next).format("DD-MM-YYYY")}</div>
+                    <div className="line7"><b>แพทย์เจ้าของไข้</b> : {h.doctor}</div>
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
+                  </>
+                );
+              }
+             
             })}
           </div>
           <div className="btn-adddata">

@@ -31,7 +31,7 @@ export const showPatientSingle = (req, res) => {
 export const insertPatient = (req, res) => {
   try {
     const q =
-      "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
+      "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
     console.log(req.body);
     let gender = "";
 
@@ -58,6 +58,7 @@ export const insertPatient = (req, res) => {
         req.body.pressure,
         req.body.cogdisease,
         req.body.allerdrug,
+        req.body.detail
       ],
       (err, data) => {
         if (err) return res.status(500).json(err);
@@ -73,7 +74,7 @@ export const addHistory = (req, res) => {
   try {
     console.log(req.body);
     const q =
-      "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next, patient_id) VALUES (?,?,now(),?,?)";
+      "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
 
     db.query(
       q,
@@ -81,6 +82,7 @@ export const addHistory = (req, res) => {
         req.body.detail,
         req.body.medicine,
         req.body.nextdate,
+        req.body.docname,
         req.body.patientid,
       ],
       (err, data) => {
@@ -173,6 +175,23 @@ export const getPatientHistory = (req, res) => {
   });
 };
 
+export const getDocter = (req, res) => {
+  const q = `SELECT *
+  FROM docter_detail
+  `;
+  db.query(q, (err, result) => {
+    err ? console.log(err) : res.send(result);
+  });
+};
+
+export const getDoctorId = (req, res) => {
+  const q = `SELECT *
+  FROM docter_detail WHERE doc_id = ?
+  `;
+  db.query(q,[req.params.id], (err, result) => {
+    err ? console.log(err) : res.send(result);
+  });
+};
 
 export const setWaitPatient = async (req, res) => {
   try {

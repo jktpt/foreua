@@ -1,5 +1,5 @@
 import express from "express";
-import {addHistory, deletePatient, getPatientHistory, insertPatient, setWaitPatient, showPatientDetail, showPatientSingle, showPatientWaiting, updatePatient } from "../controllers/patient.js";
+import {addHistory, deletePatient, getDocter, getDoctorId, getPatientHistory, insertPatient, setWaitPatient, showPatientDetail, showPatientSingle, showPatientWaiting, updatePatient } from "../controllers/patient.js";
 
 const router = express.Router();
 
@@ -14,7 +14,10 @@ router.post("/addhistory",addHistory);
 router.get("/getpatienthistory/:id",getPatientHistory);
 router.put("/waitpatient/:id",setWaitPatient)
 
-
 router.delete("/deletepatient/:id",deletePatient);
+
+router.get("/getdocter",getDocter);
+router.get("/getdocter/:id",getDoctorId);
+
 
 export { router as patientRoutes };

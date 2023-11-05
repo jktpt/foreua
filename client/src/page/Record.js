@@ -9,22 +9,25 @@ export const Record = () => {
   const [detail, setDetail] = useState("");
   const [medicine, setMedicine] = useState("");
   const [nextDate, setNextDate] = useState("");
+  const [docter_name, setDocter] = useState([]);
+  const [docname, setDocName] = useState([]);
 
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
+  console.log(docter_name);
 
   const handleClick = async () => {
     const formData = new FormData();
-    console.log("click");
     formData.append("detail", detail);
     formData.append("medicine", medicine);
     formData.append("nextdate", nextDate);
     formData.append("patientid", patientId);
+    formData.append("docname", docname);
     if (detail || medicine || nextDate || patientId) {
       await axios
         .post(`http://localhost:3001/api/patient/addhistory`, formData)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
         });
       window.location.href = "/";
     }
@@ -40,6 +43,11 @@ export const Record = () => {
               setData(res.data[0]);
             });
         }
+        await axios
+          .get(`http://localhost:3001/api/patient/getdocter`)
+          .then((res) => {
+            setDocter(res.data);
+          });
       };
       fetchData();
     } catch (err) {
@@ -72,11 +80,12 @@ export const Record = () => {
                 {data.patient_height}
               </p>
               <p className="title1">
-                <b>เพศ</b>  {data.patient_gender === "M"
-                        ? "ชาย"
-                        : data.patient_gender === "FM"
-                        ? "หญิง"
-                        : "ไม่ระบุ"}
+                <b>เพศ</b>{" "}
+                {data.patient_gender === "M"
+                  ? "ชาย"
+                  : data.patient_gender === "FM"
+                  ? "หญิง"
+                  : "ไม่ระบุ"}
               </p>
               <p className="title1">
                 <b>โรคประจำตัว</b> {data.patient_personal_disease}
@@ -114,6 +123,20 @@ export const Record = () => {
                     required
                     onChange={(e) => setNextDate(e.target.value)}
                   />
+                </div>
+                <div className="input-field1">
+                  <label>แพทย์เจ้าของไข้</label>
+                  <select onChange={(e) => setDocName(e.target.value)}>
+                    {
+                      docter_name.map((k)=>{
+                      
+                        return (
+                          <option value={k.doc_name}>{k.doc_name}</option>
+                        );
+                      })
+                    }
+                   
+                  </select>
                 </div>
               </div>
 
