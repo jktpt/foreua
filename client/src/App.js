@@ -12,6 +12,7 @@ import { Record } from "./page/Record";
 import { Main } from "./page/Main";
 import { Doctor } from "./page/Doctor";
 import { Profile } from "./page/Profile";
+import { Update } from "./page/Update";
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <Route path="/callpatient/:id" element={<Record></Record>}></Route>
           <Route path="/doctor" element={<Doctor/>}></Route>
           <Route path="/addpatient" element={<Form></Form>}></Route>
-          <Route path="/addpatient/:id" element={<Form></Form>}></Route>
+          <Route path="/addpatient/:id" element={<Update></Update>}></Route>
           <Route path="/profile/:id" element={<Profile></Profile>}></Route>
 
           <Route path="/record" element={<Record />}>
