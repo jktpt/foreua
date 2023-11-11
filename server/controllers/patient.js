@@ -40,7 +40,6 @@ export const insertPatient = (req, res) => {
   }
     const q =
     "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
-    console.log(gender)
     db.query(
       q,
       [
@@ -90,7 +89,6 @@ export const insertDoctor = (req, res) => {
 
 export const addHistory = (req, res) => {
   try {
-    console.log(req.body);
     const q =
       "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
 
@@ -113,6 +111,31 @@ export const addHistory = (req, res) => {
           if (err) return res.status(500).json(err);
           return res.status(200).json("Insert successfully");
         });
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateHistory = (req, res) => {
+  try {
+    // const q =
+    //   "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
+    const q = "UPDATE patient_history SET his_detail = ? , his_medicine = ? , his_next = ? ,doctor = ? WHERE his_id = ?"
+    db.query(
+      q,
+      [
+        req.body.detail,
+        req.body.medicine,
+        req.body.nextdate,
+        req.body.docname,
+        req.body.hisId,
+      ],
+      (err, data) => {
+        console.log(err);
+        if (err) return res.status(500).json(err);
+        return res.status(200).json("Update successfully");
       }
     );
   } catch (err) {
@@ -229,4 +252,13 @@ export const setWaitPatient = async (req, res) => {
     // console.error("Error to fetch carousel file: ", err);
     res.status(500).json({ message: "Error to fetch patient." });
   }
+};
+
+export const getDepProfile = (req, res) => {
+  const q = `SELECT *
+  FROM patient_history WHERE his_id = ?
+  `;
+  db.query(q,[req.params.id], (err, result) => {
+    err ? console.log(err) : res.send(result);
+  });
 };
