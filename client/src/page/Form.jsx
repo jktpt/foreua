@@ -150,7 +150,7 @@ export const Form = () => {
                     placeholder="ชื่อ"
                     required
                     value={name}
-                    disabled={name.length > 0}
+ 
                   />
                 </div>
 
@@ -162,7 +162,6 @@ export const Form = () => {
                     placeholder="นามสกุล"
                     required
                     value={lname}
-                    disabled={lname.length > 0}
                   />
                 </div>
 
@@ -175,7 +174,7 @@ export const Form = () => {
                     required
                     value={dob.split('T')[0]}
                     max={new Date().toISOString().split('T')[0]}
-                    disabled={dob.length > 0}
+
                   />
                 </div>
 
@@ -189,7 +188,7 @@ export const Form = () => {
                     maxLength={13}
                     value={idcard}
                     onChange={(e) => setIdCard(e.target.value)}
-                    disabled={idcard.length === 13}
+
                   />
                 </div>
 
@@ -203,7 +202,7 @@ export const Form = () => {
                     minLength={10}
                     maxLength={10}
                     value={tel}
-                    disabled={tel.length > 0}
+  
                   />
                 </div>
 
@@ -212,9 +211,9 @@ export const Form = () => {
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    disabled={gender.length > 0}
+
                   >
-                    <option value="" disabled>
+                    <option value="" >
                       เพศ
                     </option>
                     <option value="M" selected={gender === "M"}>ชาย</option>
@@ -231,7 +230,7 @@ export const Form = () => {
                     placeholder="ที่อยู่"
                     required
                     value={address}
-                    disabled={address.length > 0}
+
                   />
                 </div>
 

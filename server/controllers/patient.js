@@ -30,19 +30,17 @@ export const showPatientSingle = (req, res) => {
 
 export const insertPatient = (req, res) => {
   try {
+   var gender = "";
+   if (req.body.gender === "M") {
+    gender = "M";
+  } else if (req.body.gender === "FM") {
+    gender = "FM";
+  } else if (req.body.gender === "OT") {
+    gender = "OT";
+  }
     const q =
-      "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
-    console.log(req.body);
-    let gender = "";
-
-    if (req.body.gender === "Male") {
-      gender = "M";
-    } else if (req.body.gender === "Female") {
-      gender = "FM";
-    } else if (req.body.gender === "Others") {
-      gender = "OT";
-    }
-
+    "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
+    console.log(gender)
     db.query(
       q,
       [
@@ -59,6 +57,26 @@ export const insertPatient = (req, res) => {
         req.body.cogdisease,
         req.body.allerdrug,
         req.body.detail
+      ],
+      (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json("Insert successfully");
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const insertDoctor = (req, res) => {
+  try {
+ 
+    const q =
+    "INSERT INTO docter_detail(doc_name) VALUES (?)";
+    db.query(
+      q,
+      [
+        req.body.name,
       ],
       (err, data) => {
         if (err) return res.status(500).json(err);

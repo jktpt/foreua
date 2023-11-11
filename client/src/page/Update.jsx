@@ -19,7 +19,6 @@ export const Update = () => {
   const [cogdisease, setCogDisease] = useState("");
   const [allerdrug, setAllerDrug] = useState("");
   const [detail, setDetail] = useState("");
-  // const curDate = new Date();
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
 
@@ -68,30 +67,8 @@ export const Update = () => {
             window.location.href = "/";
           });
       }
-    } else {
-      if (
-        name.trim() !== "" ||
-        lname.trim() !== "" ||
-        dob.trim() !== "" ||
-        idcard.trim() !== "" ||
-        tel.trim() !== "" ||
-        gender.trim() !== "" ||
-        address.trim() !== "" ||
-        weight.trim() !== "" ||
-        height.trim() !== "" ||
-        pressure.trim() !== "" ||
-        cogdisease.trim() !== "" ||
-        allerdrug.trim() !== "" ||
-        detail.trim() !== ""
-
-      ) {
-        await axios
-          .post(`http://localhost:3001/api/patient/insertpatient`, formData)
-          .then((res) => {
-            window.location.href = "/";
-          });
-      }
     }
+     
     // }
   };
 

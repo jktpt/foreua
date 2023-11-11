@@ -221,6 +221,10 @@ export const Main = () => {
             <Link to="/doctor">
               <button className="btn-doctor">Doctor form</button>
             </Link>
+
+            <Link to="/adddoctor">
+              <button className="btn-doc">Add Doctor</button>
+            </Link>
           </div>
         </div>
       </div>
