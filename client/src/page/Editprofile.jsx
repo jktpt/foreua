@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export const Record = () => {
+export const Editprofile = () => {
   const [data, setData] = useState([]);
   const [detail, setDetail] = useState("");
   const [medicine, setMedicine] = useState("");
@@ -122,7 +122,6 @@ export const Record = () => {
                     placeholder="วันนัดครั้งต่อไป"
                     required
                     onChange={(e) => setNextDate(e.target.value)}
-                    min={new Date().toISOString().split('T')[0]}
                   />
                 </div>
                 <div className="input-field1">

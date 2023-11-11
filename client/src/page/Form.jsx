@@ -40,58 +40,58 @@ export const Form = () => {
     formData.append("allerdrug", allerdrug);
     formData.append("detail", detail);
     if(tel.length !== 10 && idcard.length !== 13){
-      alert("กรุณาใส่เบอร์โทรศัพท์หรือเลขบัตรประจำตัวประชาชนให้ถูกต้อง")
+      alert("กรุณาใส่เบอร์โทรศัพท์หรือเลขบัตรประจำตัวประชาชนให้ถูกต้อง");
     }else{
-      
-    }
-    if (data) {
-      if (
-        name.trim() !== "" ||
-        lname.trim() !== "" ||
-        dob.trim() !== "" ||
-        idcard.trim() !== "" ||
-        tel.trim() !== "" ||
-        gender.trim() !== "" ||
-        address.trim() !== "" ||
-        weight.trim() !== "" ||
-        height.trim() !== "" ||
-        pressure.trim() !== "" ||
-        cogdisease.trim() !== "" ||
-        allerdrug.trim() !== "" ||
-        detail.trim() !== ""
-      ) {
-        formData.append("patientid", patientId);
-
-        await axios
-          .put(`http://localhost:3001/api/patient/updatepatient`, formData)
-          .then((res) => {
-            window.location.href = "/";
-          });
+      if (data) {
+        if (
+          name.trim() !== "" ||
+          lname.trim() !== "" ||
+          dob.trim() !== "" ||
+          idcard.trim() !== "" ||
+          tel.trim() !== "" ||
+          gender.trim() !== "" ||
+          address.trim() !== "" ||
+          weight.trim() !== "" ||
+          height.trim() !== "" ||
+          pressure.trim() !== "" ||
+          cogdisease.trim() !== "" ||
+          allerdrug.trim() !== "" ||
+          detail.trim() !== ""
+        ) {
+          formData.append("patientid", patientId);
+  
+          await axios
+            .put(`http://localhost:3001/api/patient/updatepatient`, formData)
+            .then((res) => {
+              window.location.href = "/";
+            });
+        }
+      } else {
+        if (
+          name.trim() !== "" ||
+          lname.trim() !== "" ||
+          dob.trim() !== "" ||
+          idcard.trim() !== "" ||
+          tel.trim() !== "" ||
+          gender.trim() !== "" ||
+          address.trim() !== "" ||
+          weight.trim() !== "" ||
+          height.trim() !== "" ||
+          pressure.trim() !== "" ||
+          cogdisease.trim() !== "" ||
+          allerdrug.trim() !== "" ||
+          detail.trim() !== ""
+  
+        ) {
+          await axios
+            .post(`http://localhost:3001/api/patient/insertpatient`, formData)
+            .then((res) => {
+              window.location.href = "/";
+            });
+        }
       }
-    } else {
-      if (
-        name.trim() !== "" ||
-        lname.trim() !== "" ||
-        dob.trim() !== "" ||
-        idcard.trim() !== "" ||
-        tel.trim() !== "" ||
-        gender.trim() !== "" ||
-        address.trim() !== "" ||
-        weight.trim() !== "" ||
-        height.trim() !== "" ||
-        pressure.trim() !== "" ||
-        cogdisease.trim() !== "" ||
-        allerdrug.trim() !== "" ||
-        detail.trim() !== ""
-
-      ) {
-        await axios
-          .post(`http://localhost:3001/api/patient/insertpatient`, formData)
-          .then((res) => {
-            window.location.href = "/";
-          });
-      }
     }
+   
     // }
   };
 
