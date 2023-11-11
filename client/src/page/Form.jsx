@@ -39,7 +39,7 @@ export const Form = () => {
     formData.append("cogdisease", cogdisease);
     formData.append("allerdrug", allerdrug);
     formData.append("detail", detail);
-    if(tel.length !== 10 && idcard.length !== 13){
+    if(tel.length !== 10 || idcard.length !== 13){
       alert("กรุณาใส่เบอร์โทรศัพท์หรือเลขบัตรประจำตัวประชาชนให้ถูกต้อง");
     }else{
       if (data) {
