@@ -144,6 +144,7 @@ export const Editprofile = () => {
                     required
                     onChange={(e) => setNextDate(e.target.value)}
                     value={nextDate.split("T")[0]}
+                    min={new Date().toISOString().split('T')[0]}
                   />
                 </div>
                 <div className="input-field1">
