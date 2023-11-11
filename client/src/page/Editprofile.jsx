@@ -11,10 +11,12 @@ export const Editprofile = () => {
   const [nextDate, setNextDate] = useState("");
   const [docter_name, setDocter] = useState([]);
   const [docname, setDocName] = useState([]);
+  const [dataDocName, setDataDocName] = useState("");
+  const [history, setHistory] = useState([]);
 
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
-  console.log(docter_name);
+  const hisId = location.pathname.split("/")[3];
 
   const handleClick = async () => {
     const formData = new FormData();
@@ -23,13 +25,15 @@ export const Editprofile = () => {
     formData.append("nextdate", nextDate);
     formData.append("patientid", patientId);
     formData.append("docname", docname);
+    formData.append("hisId", hisId);
     if (detail || medicine || nextDate || patientId) {
       await axios
-        .post(`http://localhost:3001/api/patient/addhistory`, formData)
+        .post(`http://localhost:3001/api/patient/updatehistory`, formData)
         .then((res) => {
-          // console.log(res);
+          console.log(res);
+        
         });
-      window.location.href = "/";
+        window.location.href = `/profile/${patientId}`;
     }
   };
 
@@ -48,12 +52,27 @@ export const Editprofile = () => {
           .then((res) => {
             setDocter(res.data);
           });
+
+        await axios
+          .get(`http://localhost:3001/api/patient/getprofiledep/${hisId}`)
+          .then((res) => {
+            setHistory(res.data[0]);
+          });
       };
       fetchData();
     } catch (err) {
       console.error("Failed to fetch data: " + err);
     }
   }, []);
+
+  useEffect(() => {
+    if (history && Object.keys(history).length > 0) {
+      setDetail(history.his_detail || "");
+      setMedicine(history.his_medicine || "");
+      setNextDate(history.his_next || "");
+      setDataDocName(history.doctor || "");
+    }
+  }, [history]);
 
   return (
     <div className="container-bg1">
@@ -102,6 +121,7 @@ export const Editprofile = () => {
                     placeholder="บันทึกการรักษา"
                     required
                     onChange={(e) => setDetail(e.target.value)}
+                    value={detail}
                   />
                 </div>
 
@@ -112,6 +132,7 @@ export const Editprofile = () => {
                     placeholder="ยาที่ได้รับ"
                     required
                     onChange={(e) => setMedicine(e.target.value)}
+                    value={medicine}
                   />
                 </div>
 
@@ -122,20 +143,22 @@ export const Editprofile = () => {
                     placeholder="วันนัดครั้งต่อไป"
                     required
                     onChange={(e) => setNextDate(e.target.value)}
+                    value={nextDate.split("T")[0]}
                   />
                 </div>
                 <div className="input-field1">
                   <label>แพทย์เจ้าของไข้</label>
                   <select onChange={(e) => setDocName(e.target.value)}>
-                    {
-                      docter_name.map((k)=>{
-                      
-                        return (
-                          <option value={k.doc_name}>{k.doc_name}</option>
-                        );
-                      })
-                    }
-                   
+                    {docter_name.map((k) => {
+                      return (
+                        <option
+                          value={k.doc_name}
+                          selected={k.doc_name === dataDocName}
+                        >
+                          {k.doc_name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>

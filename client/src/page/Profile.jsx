@@ -84,9 +84,13 @@ export const Profile = () => {
                     <div className="line6"><b>ยาที่ได้รับ</b> : {h.his_medicine}</div>
                     <div className="line7"><b>นัดครั้งต่อไป</b> : {moment(h.his_next).format("DD-MM-YYYY")}</div>
                     <div className="line7"><b>แพทย์เจ้าของไข้</b> : {h.doctor}</div>
+                    <Link to={`/editprofile/${h.patient_id}/${h.his_id}`} >
+                      <button type="submit" className="btn-add">Edit data</button>
+                    </Link>
+                    <br></br>
                     <br></br>
                     <hr></hr>
-                    <br></br>
+
                   </>
                 );
               }

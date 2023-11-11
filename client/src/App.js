@@ -10,6 +10,7 @@ import { Doctor } from "./page/Doctor";
 import { Profile } from "./page/Profile";
 import { Update } from "./page/Update";
 import { Adddoctor } from "./page/Adddoctor";
+import { Editprofile } from "./page/Editprofile";
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
           <Route path="/adddoctor" element={<Adddoctor />}/>
           <Route path="/record" element={<Record />}>
           </Route>
-
+          <Route path="/editprofile/:id/:id" element={<Editprofile />}>
+          </Route>
         </Routes >
       </Router >
     </div>
