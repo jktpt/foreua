@@ -207,10 +207,10 @@ export const Main = () => {
               getRowId={(row) => row.patient_id}
               rows={data}
               columns={columns}
-              pageSize={14}
-              rowsPerPageOptions={[14]}
+              pageSize={7}
+              rowsPerPageOptions={[7]}
               checkboxSelection
-              style={{ height: "700px" }}
+              style={{ height: "600px" }}
             />
           </div>
           <div className="btn-adddata">
