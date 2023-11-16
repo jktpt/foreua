@@ -56,6 +56,14 @@ export const Doctor = () => {
       headerAlign: "center",
       align: "center",
     },
+    {
+      field: `patient_detail`,
+      headerName: "Detail",
+      type: "string",
+      width: 100,
+      headerAlign: "center",
+      align: "center",
+    },
     // {
     //   field: `patient_personal_disease`,
     //   headerName: "Personal disease",
@@ -121,7 +129,7 @@ export const Doctor = () => {
               pageSize={14}
               rowsPerPageOptions={[14]}
               checkboxSelection
-              style={{ height: "700px" }}
+              style={{ height: "600px" }}
             />
           </div>
           <div className="btn-adddata">
