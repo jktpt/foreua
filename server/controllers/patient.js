@@ -145,7 +145,6 @@ export const updateHistory = (req, res) => {
 
 export const updatePatient = (req, res) => {
   try {
-    console.log(req.body.detail);
     const q =
       "UPDATE patient_detail SET patient_name=?,patient_lname=?,patient_dob=?,patient_id_card=?,patient_tel=?,patient_gender=?,patient_address=?,patient_weight=?,patient_height=?,patient_pressure=?,patient_personal_disease=?,patient_medic=?,patient_detail=? WHERE patient_id=? ";
     let gender = "";
