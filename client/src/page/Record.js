@@ -14,7 +14,7 @@ export const Record = () => {
 
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
-  console.log(docter_name);
+  // console.log(docter_name);
 
   const handleClick = async () => {
     const formData = new FormData();
@@ -92,6 +92,9 @@ export const Record = () => {
               </p>
               <p className="title1">
                 <b>ยาที่แพ้</b> {data.patient_medic}
+              </p>
+              <p className="title1">
+                <b>อาการเบื้องต้น</b> {data.patient_detail}
               </p>
 
               <div className="fields1">

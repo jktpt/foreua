@@ -112,6 +112,9 @@ export const Editprofile = () => {
               <p className="title1">
                 <b>ยาที่แพ้</b> {data.patient_medic}
               </p>
+              <p className="title1">
+                <b>อาการเบื้องต้น</b> {data.patient_detail}
+              </p>
 
               <div className="fields1">
                 <div className="input-field1">

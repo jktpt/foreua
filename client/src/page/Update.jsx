@@ -19,6 +19,7 @@ export const Update = () => {
   const [cogdisease, setCogDisease] = useState("");
   const [allerdrug, setAllerDrug] = useState("");
   const [detail, setDetail] = useState("");
+  const [today , setToday] = useState("");
   const location = useLocation();
   const patientId = location.pathname.split("/")[2];
 
@@ -103,7 +104,11 @@ export const Update = () => {
       setPressure(data.patient_pressure || "");
       setCogDisease(data.patient_personal_disease || "");
       setAllerDrug(data.patient_medic || "");
-      setDetail(data.patient_detail || "")
+      setDetail(data.patient_detail || "");
+      const originalDate = new Date(data.patient_dob);
+      const newDate = new Date(originalDate);
+      newDate.setDate(originalDate.getDate() + 1);
+      setToday(newDate.toISOString());
     }
   }, [data]);
 
@@ -150,7 +155,7 @@ export const Update = () => {
                     onChange={(e) => setDob(e.target.value)}
                     placeholder="วันเดือนปีเกิด"
                     required
-                    value={dob.split('T')[0]}
+                    value={today.split('T')[0]}
                     max={new Date().toISOString().split('T')[0]}
                     disabled={dob.length > 0}
                   />
@@ -162,14 +167,13 @@ export const Update = () => {
                     type="number"
                     placeholder="รหัสบัตรประชาชน"
                     required
-                    minLength={13}
-                    maxLength={13}
+                    disabled
                     value={idcard}
                     onChange={(e) => setIdCard(e.target.value)}
-                    disabled={idcard.length === 13}
+                    // disabled={idcard.length === 13}
                   />
                 </div>
-
+               
                 <div className="input-field">
                   <label>เบอร์โทรศัพท์</label>
                   <input
