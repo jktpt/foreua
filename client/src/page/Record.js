@@ -23,13 +23,22 @@ export const Record = () => {
     formData.append("nextdate", nextDate);
     formData.append("patientid", patientId);
     formData.append("docname", docname);
-    if (detail || medicine || nextDate || patientId) {
-      await axios
+    if (detail) {
+      console.log("ก่อนยิงนะ");
+      try{
+        await axios
         .post(`http://localhost:3001/api/patient/addhistory`, formData)
         .then((res) => {
-          // console.log(res);
+          // console.log();
+          window.alert("อัพเดตข้อมูลสำเร็จแล้ว")
         });
+      }catch(e){
+        console.log(e);
+      }
+      console.log("ยิงแล้วนะ");
       window.location.href = "/";
+    }else{
+      window.alert("อัพเดตข้อมูลไม่สำเร็จ")
     }
   };
 

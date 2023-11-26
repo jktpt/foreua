@@ -30,16 +30,16 @@ export const showPatientSingle = (req, res) => {
 
 export const insertPatient = (req, res) => {
   try {
-   var gender = "";
-   if (req.body.gender === "M") {
-    gender = "M";
-  } else if (req.body.gender === "FM") {
-    gender = "FM";
-  } else if (req.body.gender === "OT") {
-    gender = "OT";
-  }
+    var gender = "";
+    if (req.body.gender === "M") {
+      gender = "M";
+    } else if (req.body.gender === "FM") {
+      gender = "FM";
+    } else if (req.body.gender === "OT") {
+      gender = "OT";
+    }
     const q =
-    "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
+      "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
     db.query(
       q,
       [
@@ -55,7 +55,7 @@ export const insertPatient = (req, res) => {
         req.body.pressure,
         req.body.cogdisease,
         req.body.allerdrug,
-        req.body.detail
+        req.body.detail,
       ],
       (err, data) => {
         if (err) return res.status(500).json(err);
@@ -69,19 +69,11 @@ export const insertPatient = (req, res) => {
 
 export const insertDoctor = (req, res) => {
   try {
- 
-    const q =
-    "INSERT INTO docter_detail(doc_name) VALUES (?)";
-    db.query(
-      q,
-      [
-        req.body.name,
-      ],
-      (err, data) => {
-        if (err) return res.status(500).json(err);
-        return res.status(200).json("Insert successfully");
-      }
-    );
+    const q = "INSERT INTO docter_detail(doc_name) VALUES (?)";
+    db.query(q, [req.body.name], (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json("Insert successfully");
+    });
   } catch (err) {
     console.log(err);
   }
@@ -102,13 +94,18 @@ export const addHistory = (req, res) => {
         req.body.patientid,
       ],
       (err, data) => {
+        // console.log(err);
+        console.log(JSON.stringify(req.body) + "update แล้วนะ 1");
         console.log(err);
         if (err) return res.status(500).json(err);
         // return res.status(200).json("Insert successfully");
         const q2 =
           "UPDATE patient_detail SET patient_status='done' WHERE patient_id = ?";
         db.query(q2, [req.body.patientid], (err, data) => {
+          console.log(err);
+
           if (err) return res.status(500).json(err);
+          console.log(JSON.stringify(req.body) + "update แล้วนะ 2");
           return res.status(200).json("Insert successfully");
         });
       }
@@ -122,7 +119,8 @@ export const updateHistory = (req, res) => {
   try {
     // const q =
     //   "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
-    const q = "UPDATE patient_history SET his_detail = ? , his_medicine = ? , his_next = ? ,doctor = ? WHERE his_id = ?"
+    const q =
+      "UPDATE patient_history SET his_detail = ? , his_medicine = ? , his_next = ? ,doctor = ? WHERE his_id = ?";
     db.query(
       q,
       [
@@ -172,7 +170,7 @@ export const updatePatient = (req, res) => {
         req.body.cogdisease,
         req.body.allerdrug,
         req.body.detail,
-        req.body.patientid
+        req.body.patientid,
       ],
       (err, data) => {
         if (err) {
@@ -230,7 +228,7 @@ export const getDoctorId = (req, res) => {
   const q = `SELECT *
   FROM docter_detail WHERE doc_id = ?
   `;
-  db.query(q,[req.params.id], (err, result) => {
+  db.query(q, [req.params.id], (err, result) => {
     err ? console.log(err) : res.send(result);
   });
 };
@@ -238,10 +236,9 @@ export const getDoctorId = (req, res) => {
 export const setWaitPatient = async (req, res) => {
   try {
     // console.log(req.params.id);
-    const q =
-      "SELECT * FROM patient_detail WHERE patient_id = ?";
+    const q = "SELECT * FROM patient_detail WHERE patient_id = ?";
     db.query(q, [req.params.id], (err, data) => {
-     if (data[0].patient_status === "done") {
+      if (data[0].patient_status === "done") {
         const q =
           "UPDATE patient_detail SET patient_status ='waiting' WHERE patient_id  = ?";
         db.query(q, [req.params.id], (err, data) => {
@@ -259,7 +256,7 @@ export const getDepProfile = (req, res) => {
   const q = `SELECT *
   FROM patient_history WHERE his_id = ?
   `;
-  db.query(q,[req.params.id], (err, result) => {
+  db.query(q, [req.params.id], (err, result) => {
     err ? console.log(err) : res.send(result);
   });
 };
