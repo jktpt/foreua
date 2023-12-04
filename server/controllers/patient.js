@@ -81,15 +81,19 @@ export const insertDoctor = (req, res) => {
 
 export const addHistory = (req, res) => {
   try {
+    console.log(req.body.nextdate);
     const q =
       "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
-
+      const inputDate = new Date(req.body.nextdate);
+      const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
+      const resultISOString = resultDate.toISOString().split('T')[0];
+      console.log(resultDate);
     db.query(
       q,
       [
         req.body.detail,
         req.body.medicine,
-        req.body.nextdate,
+        resultDate,
         req.body.docname,
         req.body.patientid,
       ],
@@ -119,6 +123,10 @@ export const updateHistory = (req, res) => {
   try {
     // const q =
     //   "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
+    const inputDate = new Date(req.body.nextdate);
+    const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
+    const resultISOString = resultDate.toISOString().split('T')[0];
+    console.log(resultDate);
     const q =
       "UPDATE patient_history SET his_detail = ? , his_medicine = ? , his_next = ? ,doctor = ? WHERE his_id = ?";
     db.query(
@@ -126,7 +134,7 @@ export const updateHistory = (req, res) => {
       [
         req.body.detail,
         req.body.medicine,
-        req.body.nextdate,
+        resultDate,
         req.body.docname,
         req.body.hisId,
       ],
