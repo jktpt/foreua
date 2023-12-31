@@ -3,6 +3,8 @@ import "./form.css";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import moment from 'moment-timezone';
+
 
 export const Form = () => {
   const [data, setData] = useState();
@@ -91,8 +93,6 @@ export const Form = () => {
         }
       }
     }
-   
-    // }
   };
 
   useEffect(() => {
@@ -113,10 +113,14 @@ export const Form = () => {
   }, []);
 
   useEffect(() => {
+    const originalDob = moment(data.patient_dob);
+    const newDob = originalDob.add(7, 'hours');
+
     if (data && Object.keys(data).length > 0) {
       setName(data.patient_name || "");
       setLName(data.patient_lname || "");
-      setDob(data.patient_dob || "");
+      setDob(newDob.format() || "");
+      // setDob(data.patient_dob || "");
       setIdCard(data.patient_id_card || "");
       setTel(data.patient_tel || "");
       setGender(data.patient_gender || "");
