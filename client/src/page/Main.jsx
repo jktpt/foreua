@@ -10,7 +10,6 @@ export const Main = () => {
 
   const deletePatient = async (id, name) => {
     try {
-      console.log(id);
       if (window.confirm(`Do you want to delete ${name} ?`) === true) {
         await axios
           .delete(`http://localhost:3001/api/patient/deletepatient/${id}`)

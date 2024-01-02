@@ -77,7 +77,7 @@ export const Editprofile = () => {
   return (
     <div className="container-bg1">
       <div className="container1">
-        <Link to="/doctor">
+        <Link to="/">
           <button className="button-89">
             <span className="btnText1">ย้อนกลับ</span>
             <i className="uil uil-navigator1"></i>

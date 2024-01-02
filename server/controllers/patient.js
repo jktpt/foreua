@@ -38,6 +38,8 @@ export const insertPatient = (req, res) => {
     } else if (req.body.gender === "OT") {
       gender = "OT";
     }
+    const inputDate = new Date(req.body.dob);
+    const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
     const q =
       "INSERT INTO patient_detail(patient_name, patient_lname, patient_dob, patient_id_card, patient_tel, patient_gender, patient_address, patient_weight, patient_height, patient_pressure, patient_personal_disease, patient_medic,patient_detail,patient_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,'waiting')";
     db.query(
@@ -45,7 +47,7 @@ export const insertPatient = (req, res) => {
       [
         req.body.name,
         req.body.lname,
-        req.body.dob,
+        resultDate,
         req.body.idcard,
         req.body.tel,
         gender,
@@ -81,13 +83,10 @@ export const insertDoctor = (req, res) => {
 
 export const addHistory = (req, res) => {
   try {
-    console.log(req.body.nextdate);
     const q =
       "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
       const inputDate = new Date(req.body.nextdate);
       const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
-      const resultISOString = resultDate.toISOString().split('T')[0];
-      console.log(resultDate);
     db.query(
       q,
       [
@@ -125,8 +124,6 @@ export const updateHistory = (req, res) => {
     //   "INSERT INTO patient_history(his_detail, his_medicine,his_today, his_next,doctor, patient_id) VALUES (?,?,now(),?,?,?)";
     const inputDate = new Date(req.body.nextdate);
     const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
-    const resultISOString = resultDate.toISOString().split('T')[0];
-    console.log(resultDate);
     const q =
       "UPDATE patient_history SET his_detail = ? , his_medicine = ? , his_next = ? ,doctor = ? WHERE his_id = ?";
     db.query(
@@ -154,6 +151,8 @@ export const updatePatient = (req, res) => {
     const q =
       "UPDATE patient_detail SET patient_name=?,patient_lname=?,patient_dob=?,patient_id_card=?,patient_tel=?,patient_gender=?,patient_address=?,patient_weight=?,patient_height=?,patient_pressure=?,patient_personal_disease=?,patient_medic=?,patient_detail=? WHERE patient_id=? ";
     let gender = "";
+    const inputDate = new Date(req.body.dob);
+    const resultDate = new Date(inputDate.getTime() + 7 * 60 * 60 * 1000);
 
     if (req.body.gender === "M") {
       gender = "M";
@@ -167,7 +166,7 @@ export const updatePatient = (req, res) => {
       [
         req.body.name,
         req.body.lname,
-        req.body.dob,
+        resultDate,
         req.body.idcard,
         req.body.tel,
         gender,

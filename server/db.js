@@ -7,7 +7,6 @@ export const db = mysql.createConnection({
     database: "patient_db",
     port:3307
 })
-    
 
 db.connect((err) => {
     if (err) throw err.message;
