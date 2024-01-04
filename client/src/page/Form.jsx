@@ -113,10 +113,10 @@ export const Form = () => {
   }, []);
 
   useEffect(() => {
-    const originalDob = moment(data.patient_dob);
-    const newDob = originalDob.add(7, 'hours');
-
     if (data && Object.keys(data).length > 0) {
+      const originalDob = moment(data.patient_dob);
+      const newDob = originalDob.add(7, 'hours');
+
       setName(data.patient_name || "");
       setLName(data.patient_lname || "");
       setDob(newDob.format() || "");
